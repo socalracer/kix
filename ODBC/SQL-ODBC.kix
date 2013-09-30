@@ -1,0 +1,11 @@
+/* Software ODBC Settings*/
+/* Where Software is the name of the software. This was used for an ODBC connection to SQL 2008 R2 with XP/Win7 clients */
+
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\Software", "Database", "Database.Name", "REG_SZ")
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\Software", "Driver", "C:\WINDOWS\system32\sqlncli10.dll", "REG_SZ")
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\Software", "LastUser", "username", "REG_SZ")
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\Software", "Server", "servername", "REG_SZ")
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\Softwarer", "Trusted_Connection", "Yes", "REG_SZ")
+	WriteValue("HKEY_LOCAL_MACHINE\SOFTWARE\ODBC\ODBC.INI\ODBC Data Sources\", "Software", "SQL Server Native Client 10.0", "REG_SZ")
+
+? "Software ODBC settings applied"
