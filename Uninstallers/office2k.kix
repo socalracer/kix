@@ -1,0 +1,12 @@
+/* Requires psexec in the netlogon (or kix) directory */
+/* run psexec before using the script */
+/* This will silently uninstall MS Office 2000 (Product Code {00010409-78E1-11D2-B60F-006097C998E7}) */
+Break OFF
+
+Shell @LSERVER + "\netlogon\psexec -accepteula -e -w %windir%\system32 -u domain\user -p password cmd /c 
+msiexec.exe /x {91130409-6000-11D3-8CFE-0150048383C9} /passive /log c:\office2k3uninstall.txt"
+
+If @ERROR
+	;	? " ! Launcher returned error code " + @ERROR
+	Exit(@ERROR) 
+EndIf
