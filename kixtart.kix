@@ -1,0 +1,32 @@
+/* Call kix script with logged on user */
+  RUN "\\server\netlogon\KIX32.exe \\server\netlogon\software.kix"
+
+
+/* Echo into command shell when running from command
+	? "Software fixes script called"
+
+
+/* Map user drive to U: and store IE Favorites there, requires special setup on server */
+IF Ingroup("Domain Users")
+	USE U: /DELETE /PERSISTENT:YES
+	USE U: "\\server\%username%"
+	MD "U:\Favorites"
+	WRITEVALUE ("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders","Favorites","U:\Favorites","REG_EXPAND_SZ")
+ENDIF
+	
+	
+/* If user is in "Shipping OU in AD" remove anything mapped to S: drive and map S: drive to share on server
+IF INGROUP("Shipping")
+
+  	USE S: /DELETE /PERSISTENT:YES
+  	USE S: "\\server\share"
+
+	/* Printer cleanup - Removes all printers for this user*/
+ 	DELTREE ("HKEY_CURRENT_USER\Printers\Connections\")
+ 
+	/* Add printer from printserver with share name shipping
+ 	ADDPRINTERCONNECTION ("\\printserver\shipping")  
+	
+	/* Set printer from printserver with share name shipping as default printer*/
+ 	SETDEFAULTPRINTER ("\\printserver\shipping") 
+ENDIF
